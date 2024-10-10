@@ -27,21 +27,29 @@ async def command_start_handler(message: types.Message, bot: Bot):
 
 @dp.message(Command("add"))
 async def add_flower(message: types.Message, bot: Bot, command: CommandObject):
-    if command.args is None:
+    # Проверяем правильно ли пользователь ввёл команду
+    try:
+        args = command.args.split()
+        int(args[-1])
+    # Если пользователь не ввёл аргументы
+    except AttributeError:
         await message.answer(
             "Ошибка: не переданы аргументы"
         )
         return
-    elif len(command.args.split()) != 2:
+    # Если пользователь не ввёл (ввёл неправильно) частоту полива
+    except ValueError:
         await message.answer(
-            "Ошибка: неправильно передали аргументы"
+            "Ошибка: неправильно переданы аргументы\n"
+            "Пример: Алоэ 3"
         )
+        return
 
     flower, frequency = command.args.split()
     flowers[flower] = frequency
 
     scheduler.add_job(bot.send_message, 'interval', days=int(frequency),
-                      args=[message.from_user.id, f"Напоминаю 💧 полить 💧 {flower}"])
+                      args=[message.from_user.id, f"Напоминаю полить 🌧️ {flower}"])
 
     watering = datetime.now() + timedelta(days=int(frequency))
     await message.answer(f"Следующий полив 💧: {datetime.strftime(watering, '%A %H:%M')}")
