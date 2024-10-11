@@ -2,7 +2,7 @@ import logging
 import asyncio
 import sys
 
-from aiogram import Bot, Dispatcher, types, BaseMiddleware, F
+from aiogram import Bot, Dispatcher, types
 from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
 from aiogram.filters import CommandStart, Command, CommandObject
@@ -45,13 +45,14 @@ async def add_flower(message: types.Message, bot: Bot, command: CommandObject):
         )
         return
 
-    flower, frequency = command.args.split()
+    flower, frequency = command.args.split()[:-1], command.args.split()[-1]
+    flower = ' '.join(flower)   # если название растения из нескольких слов
     flowers[flower] = frequency
 
     scheduler.add_job(bot.send_message, 'interval', days=int(frequency),
                       args=[message.from_user.id, f"Напоминаю полить 🌧️ {flower}"])
 
-    watering = datetime.now() + timedelta(days=int(frequency))
+    watering = datetime.now() + timedelta(seconds=int(frequency))
     await message.answer(f"Следующий полив 💧: {datetime.strftime(watering, '%A %H:%M')}")
 
 
