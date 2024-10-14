@@ -32,7 +32,7 @@
 
 1.  Установите Python и необходимые библиотеки (aiogram, apscheduler)
 2.  Получите токен для бота у @BotFather
-3.  Создайте файл `token_data.py` с токеном бота / в main.py пропишите константу TOKEN и уберите импорт из token_data
+3.  Впишита токен в константу TOKEN файла token_data.py
 4.  Запустите бота командой `python main.py`
 
 **Авторы**
