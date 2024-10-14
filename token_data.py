@@ -1,1 +1,1 @@
-TOKEN = "тут_токен_вашего_бота" # полученный от BotFather
+TOKEN = '7897105790:AAFxiFkCZtP9Jr6tsEfIE5FwmYFH0xln44Y'
