@@ -8,13 +8,13 @@ from aiogram.enums import ParseMode
 from aiogram.filters import CommandStart, Command, CommandObject
 
 from token_data import TOKEN
-from datetime import datetime, date, time, timedelta
+from datetime import datetime, timedelta
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 
 
 dp = Dispatcher()  # запускает программу
 
-flowers = {}    # {'user_id': {'flower' {'frequency': int, 'watering': datetime} } }
+flowers = {}    # {'user_id': {'flower': {'frequency': int, 'watering': datetime} } }
 scheduler = AsyncIOScheduler()  # создаём наше расписание
 
 
@@ -24,7 +24,7 @@ async def command_start_handler(message: types.Message, bot: Bot):
     await bot.send_message(message.chat.id, f"🪴 Привет! Я помогу тебе не забыть полить свои любимые растения 🪴. \n\n"
                                             f"Чтобы добавить растение 🌸 в календарь полива, введите\n"
                                             f"/add (цветок) (через сколько дней поливать)\n\n"
-                                            f"Например: Фиалка 2\n\n"
+                                            f"Например: /add Фиалка 2\n\n"
                                             f"Посмотреть график полива: /show")
 
 
