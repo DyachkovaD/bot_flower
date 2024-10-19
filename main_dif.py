@@ -60,7 +60,8 @@ async def add_flower(message: types.Message, bot: Bot, command: CommandObject):
     kb = [[types.KeyboardButton(text=f'Полит цветок {flower}')]]
     keyboard = types.ReplyKeyboardMarkup(
         keyboard=kb,
-        resize_keyboard=True
+        resize_keyboard=True,
+        one_time_keyboard=True
     )
 
     # Добавляем в расписание дату первого полива
@@ -85,7 +86,8 @@ async def watered(message: types.Message, bot: Bot):
     kb = [[types.KeyboardButton(text=f'Полит цветок {flower}')]]
     keyboard = types.ReplyKeyboardMarkup(
         keyboard=kb,
-        resize_keyboard=True
+        resize_keyboard=True,
+        one_time_keyboard=True,
     )
 
     # Добавляем в расписание дату следующего полива
